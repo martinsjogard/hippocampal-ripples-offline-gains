@@ -42,3 +42,18 @@ report_lmer_effect <- function(model, term) {
   library(parameters)
   library(effectsize)
   
+  # Get model parameters with Kenward-Roger p-values
+  params <- model_parameters(model, ci_method = "wald", df_method = "kenward")
+  
+  # Get eta squared values
+  eta_sq <- eta_squared(model, partial = TRUE)
+  
+  # Extract the values for the specified term
+  row <- params[params$Parameter == term, ]
+  eta_val <- eta_sq[eta_sq$Parameter == term, "Eta2_partial"]
+  
+  # Print results
+  cat(sprintf("β = %.2f, p = %.4f, 95%% CI: %.2f—%.2f, η² = %.3f\n",
+              row$Coefficient, row$p, row$CI_low, row$CI_high, eta_val))
+}
+  
