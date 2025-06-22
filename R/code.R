@@ -57,3 +57,9 @@ report_lmer_effect <- function(model, term) {
               row$Coefficient, row$p, row$CI_low, row$CI_high, eta_val))
 }
   
+# load results for ripples and gains
+ripples_offline <- read.csv('data/offripples_subs.csv',sep = ',')
+ripples_online <- read.csv('data/onripples_subs.csv',sep = ',')
+gains_offline <-  read.csv('data/offgains_subs.csv',sep = ',')
+gains_online <-  read.csv('data/ongains_subs.csv',sep = ',')
+
